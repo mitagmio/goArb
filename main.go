@@ -11,8 +11,16 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/tkanos/gonfig"
 )
-var logger *log.Logger  
+
+type Configuration struct {
+	API_KEY    string
+	API_SECRET string
+}
+
+var logger *log.Logger
 
 // Точка входа в программу
 func main() {
@@ -37,5 +45,15 @@ func main() {
 	logger = log.New(mw, "", -1)
 	logger.SetFlags(-1)
 	logger.Println("started")
+
+	// Открываем конфиг из json файла
+	configuration := Configuration{}
+	err := gonfig.GetConf("config.json", &configuration)
+	if err != nil {
+		panic(err)
+
+	}
+
+	logger.Println("api: ", configuration.API_KEY, " ", configuration.API_SECRET)
 
 }
