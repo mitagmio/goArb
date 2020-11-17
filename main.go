@@ -15,9 +15,10 @@ import (
 	"github.com/tkanos/gonfig"
 )
 
+// Configuration is 	API_KEY string  and  API_SECRET string
 type Configuration struct {
-	API_KEY    string
-	API_SECRET string
+	APIKey    string
+	APISecret string
 }
 
 var logger *log.Logger
@@ -48,12 +49,12 @@ func main() {
 
 	// Открываем конфиг из json файла
 	configuration := Configuration{}
-	err := gonfig.GetConf("config.json", &configuration)
+	err = gonfig.GetConf("config.json", &configuration)
 	if err != nil {
 		panic(err)
 
 	}
 
-	logger.Println("api: ", configuration.API_KEY, " ", configuration.API_SECRET)
+	logger.Println("api: ", configuration.APIKey, " ", configuration.APISecret)
 
 }
