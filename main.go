@@ -7,11 +7,13 @@
 package main
 
 import (
+	"context"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
 
+	"github.com/adshao/go-binance"
 	"github.com/tkanos/gonfig"
 )
 
@@ -55,6 +57,14 @@ func main() {
 
 	}
 
-	logger.Println("api: ", configuration.APIKey, " ", configuration.APISecret)
+	// Cjtlbytybt c
+	//logger.Println("api: ", configuration.APIKey, " ", configuration.APISecret)
+	client := binance.NewClient(configuration.APIKey, configuration.APISecret)
+	ctx := context.Background()
+	exchangeInfo := client.NewExchangeInfoService()
+
+	res, err := exchangeInfo.Do(ctx)
+
+	logger.Println(res)
 
 }
